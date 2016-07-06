@@ -13,6 +13,7 @@
 		562E88251D2D4C5B0040A731 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562E88231D2D4C5B0040A731 /* Main.storyboard */; };
 		562E88271D2D4C5B0040A731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562E88261D2D4C5B0040A731 /* Assets.xcassets */; };
 		562E882A1D2D4C5B0040A731 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562E88281D2D4C5B0040A731 /* LaunchScreen.storyboard */; };
+		562E88331D2D4D390040A731 /* Recording.m in Sources */ = {isa = PBXBuildFile; fileRef = 562E88321D2D4D390040A731 /* Recording.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		562E88261D2D4C5B0040A731 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		562E88291D2D4C5B0040A731 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		562E882B1D2D4C5B0040A731 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		562E88311D2D4D390040A731 /* Recording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recording.h; path = ../Recording.h; sourceTree = "<group>"; };
+		562E88321D2D4D390040A731 /* Recording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recording.m; path = ../Recording.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,8 @@
 				562E88261D2D4C5B0040A731 /* Assets.xcassets */,
 				562E88281D2D4C5B0040A731 /* LaunchScreen.storyboard */,
 				562E882B1D2D4C5B0040A731 /* Info.plist */,
+				562E88321D2D4D390040A731 /* Recording.m */,
+				562E88311D2D4D390040A731 /* Recording.h */,
 				562E881A1D2D4C5B0040A731 /* Supporting Files */,
 			);
 			path = "Audio Recorder";
@@ -152,6 +157,7 @@
 				562E88221D2D4C5B0040A731 /* ViewController.m in Sources */,
 				562E881F1D2D4C5B0040A731 /* AppDelegate.m in Sources */,
 				562E881C1D2D4C5B0040A731 /* main.m in Sources */,
+				562E88331D2D4D390040A731 /* Recording.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
