@@ -28,7 +28,7 @@
     NSString* dateString = [formatter stringFromDate: self.date];
     return [NSString stringWithFormat:@"%@/Documents/%@.caf", home, dateString];
 }
-+ (BOOL)supportsSecureCoding
++ (BOOL) supportsSecureCoding
 {
     return YES;
 }
@@ -44,6 +44,12 @@
 -(NSString*) description
 {
     return [NSString stringWithFormat:@"Recording from %@", date];
+}
+
+-(NSURL*) url
+{
+    NSString * yay = [NSString stringWithFormat: @"file://%@",self.path];
+    return [NSURL URLWithString: yay];
 }
 //make url and description
 @end

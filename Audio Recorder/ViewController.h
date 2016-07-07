@@ -8,15 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "Recording.h"
-@interface ViewController : UIViewController
+#import <AVFoundation/AVFoundation.h>
+@interface ViewController : UIViewController <AVAudioRecorderDelegate>
 
-@property (weak) NSMutableArray* recordings;
-
+@property (weak) NSMutableArray* recordingList;
+@property (strong, nonatomic) Recording* currentRecording;
+@property (strong, nonatomic) AVAudioRecorder* recorder;
 -(void) archiveArray;
 -(NSMutableArray*) unarchiveArray;
 - (IBAction)start:(id)sender;
 - (IBAction)stop:(id)sender;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
+- (IBAction)swipe:(id)sender;
+//@property (strong, nonatomic) Recording* currentRecording;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) NSTimer* timer;
 
 @end
 
