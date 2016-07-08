@@ -15,7 +15,7 @@
 
 @property (readonly, nonatomic) NSString* path;
 @property (readonly, nonatomic) NSURL* url;
-
+@property (readonly, nonatomic) NSString* name;
 -(Recording*) initWithDate: (NSDate*) aDate;
 
 

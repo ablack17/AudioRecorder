@@ -2,18 +2,17 @@
 //  TableViewController.m
 //  Audio Recorder
 //
-//  Created by Aislin Philomena Black on 7/7/16.
+//  Created by Aislin Philomena Black on 7/8/16.
 //  Copyright © 2016 Aislin Philomena Black. All rights reserved.
 //
 
 #import "TableViewController.h"
-
+#import "Recording.h"
 @interface TableViewController ()
 
 @end
 
 @implementation TableViewController
-@synthesize otherRecordingList;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,24 +32,56 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//warning Incomplete implementation, return the number of rows
-    return 0;
+
+    return [self.otherRecordingsList count];
 }
 
-/*
+- (void) play: (Recording*) aRecording
+{
+    NSLog(@"Playing %@", aRecording.name);
+    NSAssert([[NSFileManager defaultManager] fileExistsAtPath: aRecording.path], @"Doesn't exist");
+    NSError *error;
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL: aRecording.url error:&error];
+    if(error){
+        NSLog(@"playing audio: %@ %ld %@", [error domain], [error code], [[error userInfo] description]);
+        return;
+    }else{
+        self.player.delegate = self;
+    }
+    if([self.player prepareToPlay] == NO){
+        NSLog(@"Not prepared to play!");
+        return;
+    }
+    [self.player play];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // play the audio file that maps onto the cell
+    // Recording* r = [self.recordingsList objectAtIndex: indexPath.row];
+    // [self play: r];
+    Recording* r = [self.otherRecordingsList objectAtIndex: indexPath.row];
+    [self play: r];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell" forIndexPath:indexPath];
+
+    Recording* r = [self.otherRecordingsList objectAtIndex: indexPath.row];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString* dateString = [formatter stringFromDate: r.date];
+    cell.textLabel.text = dateString;
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

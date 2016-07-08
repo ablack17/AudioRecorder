@@ -26,25 +26,11 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) archiveArray
-{
-    NSString* archive = [NSString stringWithFormat:@"%@/Documents/recordingsArchive", NSHomeDirectory()];
-    [NSKeyedArchiver archiveRootObject: recordingList toFile: archive];
-}
--(NSMutableArray*) unarchiveArray
-{
-     NSString* archive = [NSString stringWithFormat:@"%@/Documents/recordingsArchive", NSHomeDirectory()];
-     NSMutableArray* recordingSet = [[NSMutableArray alloc] init];
-    if([[NSFileManager defaultManager] fileExistsAtPath: archive]){
-        recordingSet = [NSKeyedUnarchiver unarchiveObjectWithFile:archive];
-        [[NSFileManager defaultManager] removeItemAtPath:archive error:nil];
-    }else{
-        // Doesn't exist!
-        NSLog(@"No file to open!!");
-        exit(1);
-    }
-    return recordingSet;
-
+- (void)handleTimer {
+    
+    NSLog(@"Yoohoo");
+    self.progressBar.progress = self.progressBar.progress + .2;
+    
 }
 
 -(ViewController*) initWithCoder: (NSCoder*) aDecoder
@@ -54,21 +40,37 @@
     {
         //self.recordingList = [NSMutableArray init alloc];
         
-        self.recordingList = self.unarchiveArray;
+        //self.recordingList = self.unarchiveArray;
+        NSString* archive = [NSString stringWithFormat:@"%@/Documents/recordingsArchive", NSHomeDirectory()];
+        NSMutableArray* recordingSet = [[NSMutableArray alloc] init];
+        if([[NSFileManager defaultManager] fileExistsAtPath: archive]){
+            recordingSet = [NSKeyedUnarchiver unarchiveObjectWithFile:archive];
+            [[NSFileManager defaultManager] removeItemAtPath:archive error:nil];
+        }else{
+            // Doesn't exist!
+            NSLog(@"No file to open!!");
+            //exit(1);
+        }
+        self.recordingList = recordingSet;
+
     }
     return self;
 }
+ 
+
 -(void) viewWillDisappear:(BOOL)animated
 {
     //self.archiveArray;
     NSString* archive = [NSString stringWithFormat:@"%@/Documents/recordingsArchive", NSHomeDirectory()];
     [NSKeyedArchiver archiveRootObject: recordingList toFile: archive];
 }
+
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     TableViewController* tableView = segue.destinationViewController;
-    tableView.otherRecordingList = self.recordingList;
+    tableView.otherRecordingsList = self.recordingList;
 }
+
 - (IBAction)start:(id)sender {
     
     //1. make a recording object
@@ -96,7 +98,7 @@
     
     [recordingSettings setValue:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
     
-    [recordingSettings setValue:@4100.0 forKey:AVSampleRateKey];
+    [recordingSettings setValue:@44100.0 forKey:AVSampleRateKey];
     
     [recordingSettings setValue:@1 forKey:AVNumberOfChannelsKey];
     
@@ -172,23 +174,45 @@
     
     self.statusLabel.text = @"Recording...";
     self.progressBar.progress = 0.0;
-    /*self.timer = [NSTimer
+    self.timer = [NSTimer
                   scheduledTimerWithTimeInterval:0.2
                   target:self
                   selector:@selector(handleTimer)
                   userInfo:nil
-                  repeats:YES];*/
+                  repeats:YES];
     
     
 }
 
 - (IBAction)stop:(id)sender {
     
-    //1. stop the progressBar by expiring the timer(turn off the timer)
-    //2. Clean up the recording session
-    //3. set currentRecording to nil
-    //4. reset progress bar
+    [self.recorder stop];
     
+    [self.timer invalidate];
+    self.statusLabel.text = @"Stopped";
+    self.progressBar.progress = 1.0;
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath: self.currentRecording.path]){
+        NSLog(@"File exists");
+        
+    }else{
+        NSLog(@"File does not exist");
+    }
+}
+
+
+- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *) aRecorder successfully:(BOOL)flag
+{
+    NSLog (@"audioRecorderDidFinishRecording:successfully:");
+    [self.timer invalidate];
+    self.statusLabel.text = @"Stopped";
+    self.progressBar.progress = 1.0;
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath: self.currentRecording.path]){
+        NSLog(@"File exists");
+    }else{
+        NSLog(@"File does not exist");
+    }
 }
 //didFinish(a new method)
 //1. turn off timer for progressView
@@ -202,4 +226,5 @@
     //recognizes swipe from the left
     //moves to another view which will be controlled by tableViewController
 }
+
 @end

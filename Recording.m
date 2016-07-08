@@ -51,5 +51,11 @@
     NSString * yay = [NSString stringWithFormat: @"file://%@",self.path];
     return [NSURL URLWithString: yay];
 }
-//make url and description
+-(NSString*) name
+{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString* dateString = [formatter stringFromDate: self.date];
+    return dateString;
+}//make url and description
 @end

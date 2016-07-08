@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560BF21C1D2FFE8C008C1FFB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 560BF21B1D2FFE8C008C1FFB /* TableViewController.m */; };
 		562E881C1D2D4C5B0040A731 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 562E881B1D2D4C5B0040A731 /* main.m */; };
 		562E881F1D2D4C5B0040A731 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 562E881E1D2D4C5B0040A731 /* AppDelegate.m */; };
 		562E88221D2D4C5B0040A731 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562E88211D2D4C5B0040A731 /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		560BF21A1D2FFE8C008C1FFB /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		560BF21B1D2FFE8C008C1FFB /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		562E88171D2D4C5B0040A731 /* Audio Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Audio Recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		562E881B1D2D4C5B0040A731 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		562E881D1D2D4C5B0040A731 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 				562E881E1D2D4C5B0040A731 /* AppDelegate.m */,
 				562E88201D2D4C5B0040A731 /* ViewController.h */,
 				562E88211D2D4C5B0040A731 /* ViewController.m */,
+				560BF21A1D2FFE8C008C1FFB /* TableViewController.h */,
+				560BF21B1D2FFE8C008C1FFB /* TableViewController.m */,
 				562E88231D2D4C5B0040A731 /* Main.storyboard */,
 				562E88261D2D4C5B0040A731 /* Assets.xcassets */,
 				562E88281D2D4C5B0040A731 /* LaunchScreen.storyboard */,
@@ -157,6 +162,7 @@
 				562E88221D2D4C5B0040A731 /* ViewController.m in Sources */,
 				562E881F1D2D4C5B0040A731 /* AppDelegate.m in Sources */,
 				562E881C1D2D4C5B0040A731 /* main.m in Sources */,
+				560BF21C1D2FFE8C008C1FFB /* TableViewController.m in Sources */,
 				562E88331D2D4D390040A731 /* Recording.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
