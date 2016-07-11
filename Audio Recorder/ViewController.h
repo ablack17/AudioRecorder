@@ -11,7 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 @interface ViewController : UIViewController <AVAudioRecorderDelegate>
 
-@property (weak) NSMutableArray* recordingList;
+@property (strong, nonatomic) NSMutableArray* recordingList;
 @property (strong, nonatomic) Recording* currentRecording;
 @property (strong, nonatomic) AVAudioRecorder* recorder;
 

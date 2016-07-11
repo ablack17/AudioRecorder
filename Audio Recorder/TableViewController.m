@@ -26,7 +26,8 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    // Dispose of 
+//any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -35,6 +36,7 @@
 
     return 1;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 

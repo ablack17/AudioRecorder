@@ -28,7 +28,7 @@
 
 - (void)handleTimer {
     
-    NSLog(@"Yoohoo");
+    //NSLog(@"Yoohoo");
     self.progressBar.progress = self.progressBar.progress + .2;
     
 }
@@ -64,20 +64,17 @@
     NSString* archive = [NSString stringWithFormat:@"%@/Documents/recordingsArchive", NSHomeDirectory()];
     [NSKeyedArchiver archiveRootObject: recordingList toFile: archive];
 }
-
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+/*-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     TableViewController* tableView = segue.destinationViewController;
     tableView.otherRecordingsList = self.recordingList;
+    
+    
 }
+ */
+
 
 - (IBAction)start:(id)sender {
-    
-    //1. make a recording object
-    //2. set currentRecording to new Recording
-    //3. put into the list
-    //4. set up recording session
-    //5. set up timer to update progressBar & to expire the recording session
     AVAudioSession* audioSession = [AVAudioSession sharedInstance];
     NSError* err = nil;
     [audioSession setCategory: AVAudioSessionCategoryRecord error: &err];
@@ -113,11 +110,19 @@
     
     
     NSDate* now = [NSDate date];
-    
+    self.recordingList = [[NSMutableArray alloc]init];
     self.currentRecording = [[Recording alloc] initWithDate: now];
+    NSLog(self.currentRecording.path);
     [self.recordingList addObject: self.currentRecording];
     
+    
+    for(Recording* r  in self.recordingList)
+    {
+        NSLog([NSString stringWithFormat:@"%@", r.description]);
+    }
+    
     NSLog(@"%@",self.currentRecording);
+    
     
     err = nil;
     
@@ -199,7 +204,12 @@
         NSLog(@"File does not exist");
     }
 }
-
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    TableViewController* tableView = segue.destinationViewController;
+    tableView.otherRecordingsList = [[NSMutableArray alloc]init];
+    tableView.otherRecordingsList = self.recordingList;
+}
 
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *) aRecorder successfully:(BOOL)flag
 {
@@ -213,13 +223,9 @@
     }else{
         NSLog(@"File does not exist");
     }
+    [self.recordingList addObject:self.currentRecording];
+    self.currentRecording = nil;
 }
-//didFinish(a new method)
-//1. turn off timer for progressView
-//2. Clean up the session
-//3. Set currentRecording to nil
-//reset progressView
-
 
 - (IBAction)swipe:(id)sender {
     
