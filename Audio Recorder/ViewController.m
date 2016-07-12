@@ -209,6 +209,9 @@
     TableViewController* tableView = segue.destinationViewController;
     tableView.otherRecordingsList = [[NSMutableArray alloc]init];
     tableView.otherRecordingsList = self.recordingList;
+    NSString* archive = [NSString stringWithFormat:@"%@/Documents/recordingsArchive", NSHomeDirectory()];
+    [NSKeyedArchiver archiveRootObject: recordingList toFile: archive];
+
 }
 
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *) aRecorder successfully:(BOOL)flag
@@ -223,8 +226,7 @@
     }else{
         NSLog(@"File does not exist");
     }
-    [self.recordingList addObject:self.currentRecording];
-    self.currentRecording = nil;
+    
 }
 
 - (IBAction)swipe:(id)sender {
